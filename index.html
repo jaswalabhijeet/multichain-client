@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<button id="balance" > Check Balance  </button><br>
+<div id = "response"></div>
+<button id="getAddress" > Get Addresses in my wallet  </button><br>
+<div id= "addresses"></div>
+
+<button id="send" > Send Money  </button>
+<form>
+    Asset:<input type="text" id="asset"></input><br>
+	Quantity:<input type="number" id="qty"></input><br>
+	To address: <input type="text" id="addr"></input>
+</form> 
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#balance').click(function() {
+            // run an AJAX get request to the route you setup above...
+            // respect the cross-domain policy by using the same domain
+            // you used to access your index.html file!
+            $.get('http://52.87.185.123:3000/balance', function(balance) {
+		          console.log(balance)
+                $('#response').html(balance); // show the list
+            });
+        });
+    	$('#send').click(function() {
+                // run an AJAX get request to the route you setup above...
+                // respect the cross-domain policy by using the same domain
+                // you used to access your index.html file!
+    	    $.post("http://52.87.185.123:3000/send",
+        		{
+            		
+            		address: $('#addr').val(),
+                    asset: $('#asset').val(),
+                    qty: $('#qty').val()
+        		},
+        		function(data, status){
+                    // if (status = 400){
+                    //     alert()
+                    // }
+                    $('#addr').val("");
+                    $('#asset').val("");
+                    $('#qty').val(0);
+            		// console.log(data);
+                    // console.log("haha"+status);
+                    $('#balance').trigger('click');
+    	    	})
+                .fail(function(response) {
+                    alert('Error: ' + response.responseText);
+                });
+        });
+        $('#getAddress').click(function() {
+             $.get('http://52.87.185.123:3000/addresses', function(err,addresses) {
+                console.log(addresses)
+                $('#addresses').html(addresses); // show the list
+            });
+        });
+
+        
+
+
+});
+    </script>
+</body>
+
+</html>
