@@ -53,7 +53,7 @@
                 });
         });
         $('#getAddress').click(function() {
-             $.get('http://52.87.185.123:3000/addresses', function(err,addresses) {
+             $.get('http://52.87.185.123:3000/addresses', function(addresses) {
                 console.log(addresses)
                 $('#addresses').html(addresses); // show the list
             });
