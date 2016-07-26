@@ -7,6 +7,7 @@
     "bitcoin": "^3.0.1",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "multichain-node": "^1.8.0",
     "node": "^0.0.0"
   },
   "devDependencies": {},
