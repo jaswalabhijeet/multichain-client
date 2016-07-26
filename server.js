@@ -28,10 +28,15 @@ app.get('/balance', function(req,res){
            //res.status(400);
 	         res.send(err);
        } else  {
-           console.log('Hello Money! New balance: ' + balance[0]['qty']);
+          var bal = 0;
+          if (balance.length > 0){
+            bal = balance[0]['qty'];
+
+          } 
+           console.log('Hello Money! New balance: ' + bal);
 
 	         res.header('Content-type', 'text/html');
- 	          var html = 'The new balance is ' + balance[0]['qty'] + '';
+ 	          var html = 'The new balance is ' + bal + '';
            res.end(html);    
               
 	}
